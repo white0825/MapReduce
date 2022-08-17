@@ -1,0 +1,6 @@
+/home/hdoop/PageRank/MapReduce/src/main/java/it/uniroma1/hadoop/pagerank/PageRank.java
+/home/hdoop/PageRank/MapReduce/src/main/java/it/uniroma1/hadoop/pagerank/job2/PageRankJob2Reducer.java
+/home/hdoop/PageRank/MapReduce/src/main/java/it/uniroma1/hadoop/pagerank/job2/PageRankJob2Mapper.java
+/home/hdoop/PageRank/MapReduce/src/main/java/it/uniroma1/hadoop/pagerank/job1/PageRankJob1Mapper.java
+/home/hdoop/PageRank/MapReduce/src/main/java/it/uniroma1/hadoop/pagerank/job1/PageRankJob1Reducer.java
+/home/hdoop/PageRank/MapReduce/src/main/java/it/uniroma1/hadoop/pagerank/job3/PageRankJob3Mapper.java

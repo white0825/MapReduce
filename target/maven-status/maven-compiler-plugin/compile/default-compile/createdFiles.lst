@@ -1,0 +1,6 @@
+it/uniroma1/hadoop/pagerank/job1/PageRankJob1Reducer.class
+it/uniroma1/hadoop/pagerank/job2/PageRankJob2Reducer.class
+it/uniroma1/hadoop/pagerank/job2/PageRankJob2Mapper.class
+it/uniroma1/hadoop/pagerank/PageRank.class
+it/uniroma1/hadoop/pagerank/job3/PageRankJob3Mapper.class
+it/uniroma1/hadoop/pagerank/job1/PageRankJob1Mapper.class
