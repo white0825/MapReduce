@@ -76,7 +76,8 @@ public class PageRankJob2Reducer extends Reducer<Text, Text, Text, Text> {
                 // add the contribution of all the pages having an outlink pointing 
                 // to the current node: we will add the DAMPING factor later when recomputing
                 // the final pagerank value before submitting the result to the next job.
-                sumShareOtherPageRanks += (pageRank / totalLinks);
+                if(Double.isInfinite(pageRank/totalLinks) || Double.isNaN(pageRank/totalLinks)) continue;
+                sumShareOtherPageRanks += pageRank;
             }
 
         }

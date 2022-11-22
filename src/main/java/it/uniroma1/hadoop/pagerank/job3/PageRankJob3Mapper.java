@@ -28,13 +28,14 @@
 package it.uniroma1.hadoop.pagerank.job3;
 
 import org.apache.hadoop.io.DoubleWritable;
+import java.math.BigDecimal;
 import org.apache.hadoop.io.LongWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
 import java.io.IOException;
 
-public class PageRankJob3Mapper extends Mapper<LongWritable, Text, DoubleWritable, Text> {
+public class PageRankJob3Mapper extends Mapper<LongWritable, Text, Text, Text> {
     
     @Override
     public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
@@ -55,8 +56,10 @@ public class PageRankJob3Mapper extends Mapper<LongWritable, Text, DoubleWritabl
         // extract tokens from the current line
         String page = Text.decode(value.getBytes(), 0, tIdx1);
         float pageRank = Float.parseFloat(Text.decode(value.getBytes(), tIdx1 + 1, tIdx2 - (tIdx1 + 1)));
+        BigDecimal p= new BigDecimal(pageRank);
         
-        context.write(new DoubleWritable(pageRank), new Text(page));
+        
+        context.write(new Text(p.toString()), new Text(page));
         
     }
        

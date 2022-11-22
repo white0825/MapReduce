@@ -256,14 +256,14 @@ public class PageRank {
         // input / mapper
         FileInputFormat.setInputPaths(job, new Path(in));
         job.setInputFormatClass(TextInputFormat.class);
-        job.setMapOutputKeyClass(DoubleWritable.class);
+        job.setMapOutputKeyClass(Text.class);
         job.setMapOutputValueClass(Text.class);
         job.setMapperClass(PageRankJob3Mapper.class);
         
         // output
         FileOutputFormat.setOutputPath(job, new Path(out));
         job.setOutputFormatClass(TextOutputFormat.class);
-        job.setOutputKeyClass(DoubleWritable.class);
+        job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(Text.class);
 
         return job.waitForCompletion(true);

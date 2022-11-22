@@ -43,7 +43,7 @@ public class PageRankJob2Mapper extends Mapper<LongWritable, Text, Text, Text> {
         /* PageRank calculation algorithm (mapper)
          * Input file format (separator is TAB):
          * 
-         *     <title>    <page-rank>    <link1>,<link2>,<link3>,<link4>,... ,<linkN>
+         *     <title>    <page-rank>    <link1>,<weight1>,<link2>,<weight2>,... ,<linkN>,<weightN>
          * 
          * Output has 2 kind of records:
          * One record composed by the collection of links of each page:
@@ -65,9 +65,29 @@ public class PageRankJob2Mapper extends Mapper<LongWritable, Text, Text, Text> {
         String links = Text.decode(value.getBytes(), tIdx2 + 1, value.getLength() - (tIdx2 + 1));
         
         String[] allOtherPages = links.split(",");
-        for (String otherPage : allOtherPages) { 
-            Text pageRankWithTotalLinks = new Text(pageRank + "\t" + allOtherPages.length);
-            context.write(new Text(otherPage), pageRankWithTotalLinks); 
+        int i=0;
+        int sumOfWeight=0;
+        for (String otherPage : allOtherPages) {
+            if(i%2==0){
+                int weight=Integer.parseInt(otherPage);
+                sumOfWeight+=weight;
+            }
+            i++;
+        }
+        
+        
+        i=0;
+        for (String otherPage : allOtherPages) {
+            if(i%2==1){
+                int weight=Integer.parseInt(allOtherPages[i-1]);
+                double t_pageRank=Double.parseDouble(pageRank);
+                double weightedPR=(double)weight/sumOfWeight;
+                if(sumOfWeight==0) weightedPR=0;
+
+                Text pageRankWithTotalLinks = new Text(Double.toString(t_pageRank*weightedPR) + "\t" + Integer.toString(allOtherPages.length));
+                context.write(new Text(otherPage), pageRankWithTotalLinks);
+            }
+            i++;
         }
         
         // put the original links so the reducer is able to produce the correct output
